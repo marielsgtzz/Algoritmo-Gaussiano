@@ -30,15 +30,31 @@ def sistemaMatriz():
 
 #Para hacer la matriz una matriz escalonada
 def algoGaussiano(m):
+    #Imprime la matriz como se recibió
+    imprimirMatriz(m)
+    
     #Encontrar la fila que tenga el primer (comparando columnas de izq a der) elemento diferente a cero
-    filaP = filaPrincipal(m)
+    filaPrin = filaPrincipal(m)
+    filaP = filaPrin[0]
+    pivote = filaPrin[1]
+    print(filaP,pivote)
+    print("\nLa fila principal es la "+str(filaP+1)+". R"+str(filaP+1)+"<-->R1\n")
+    
     if filaP == -1:
         return "Matriz de ceros" 
     
     #Se mueve ese renglón a R1
     m[0], m[filaP] = m[filaP], m[0]
+    imprimirMatriz(m)
     
     #Dividir el renglón principal por el valor del pivote para hacer al pivote 1
+    for cantVar in range(0,len(m[0])):
+        if cantVar != 0:
+           m[0][cantVar] = round(m[0][cantVar]/pivote, 2)
+    print("\nSe divide R1 entre "+str(pivote)+" para hacer al pivote 1\n")
+    imprimirMatriz(m)
+           
+           
     pass
 
 #Pasos:
@@ -54,8 +70,8 @@ def filaPrincipal(m):
         if ec == len(m) and m[ec-1][var]==0:
             var += 1
         elif m[ec][var]!=0:
-            return ec
-    return -1    
+            return [ec,m[ec][var]]
+    return [-1 ,-1]   
 
     
 #definir matriz
@@ -72,15 +88,14 @@ matriz3 = [[0,0,0,8],
           [0,0,1,0]]
 
 matriz4 = [[0,0,0,8],
-          [0,1,0,4],
+          [0,3,0,7],
           [0,0,1,5]]
 
 matriz5 = [[0,0,0,0],
           [0,0,0,4],
           [0,0,0,0]]
 
-imprimirMatriz(matriz3)
-print("")
-algoGaussiano(matriz3)
+#print(matriz4[1]/3)
+algoGaussiano(matriz4)
 
 
